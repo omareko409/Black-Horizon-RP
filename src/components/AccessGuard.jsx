@@ -27,8 +27,25 @@ export default function AccessGuard({ children }) {
           <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginBottom: "2rem", lineHeight: 1.6 }}>
             مرحباً بك في **Black Horizon RP**. يجب عليك تسجيل الدخول بحساب ديسكورد للوصول إلى صفحات وميزات الموقع.
           </p>
-          <button className="btn-cyber-primary" onClick={() => signIn("discord")} style={{ fontSize: "1.15rem", padding: "14px 40px" }}>
-            تسجيل الدخول بديسكورد <LogIn size={20} />
+          <button 
+            onClick={() => signIn("discord")} 
+            style={{ 
+              background: "#5865F2", 
+              color: "#ffffff", 
+              fontSize: "1.2rem", 
+              fontWeight: 800, 
+              padding: "16px 44px", 
+              borderRadius: "50px", 
+              border: "none", 
+              cursor: "pointer", 
+              boxShadow: "0 0 30px rgba(88, 101, 242, 0.6)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              transition: "transform 0.2s ease, background 0.2s ease"
+            }}
+          >
+            تسجيل الدخول بديسكورد <LogIn size={22} />
           </button>
         </div>
       </div>

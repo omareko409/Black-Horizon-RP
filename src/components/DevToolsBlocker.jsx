@@ -4,41 +4,46 @@ import { useEffect } from "react";
 
 export default function DevToolsBlocker() {
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Disable F12
+    const blockEvent = (e) => {
+      // Disable F12 (keyCode 123)
       if (e.key === "F12" || e.keyCode === 123) {
         e.preventDefault();
+        e.stopPropagation();
         return false;
       }
 
-      // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+Shift+K
       if (
-        e.ctrlKey &&
+        (e.ctrlKey || e.metaKey) &&
         e.shiftKey &&
-        (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")
+        ["I", "i", "J", "j", "C", "c", "K", "k"].includes(e.key)
       ) {
         e.preventDefault();
+        e.stopPropagation();
         return false;
       }
 
-      // Disable Ctrl+U (View Source)
-      if (e.ctrlKey && (e.key === "U" || e.key === "u")) {
+      // Disable Ctrl+U (View Source) & Ctrl+S
+      if ((e.ctrlKey || e.metaKey) && ["U", "u", "S", "s"].includes(e.key)) {
         e.preventDefault();
+        e.stopPropagation();
         return false;
       }
     };
 
-    const handleContextMenu = (e) => {
+    const disableContextMenu = (e) => {
       e.preventDefault();
+      e.stopPropagation();
       return false;
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("contextmenu", handleContextMenu);
+    // Attach with capture phase = true to intercept before anything else
+    window.addEventListener("keydown", blockEvent, true);
+    window.addEventListener("contextmenu", disableContextMenu, true);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("contextmenu", handleContextMenu);
+      window.removeEventListener("keydown", blockEvent, true);
+      window.removeEventListener("contextmenu", disableContextMenu, true);
     };
   }, []);
 
