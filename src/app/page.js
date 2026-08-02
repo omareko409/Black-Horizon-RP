@@ -40,8 +40,7 @@ export default function Home() {
           </div>
 
           <h1 className="animate-up delay-1" style={{ fontSize: "clamp(2.2rem, 4.8vw, 4.2rem)", fontWeight: 900, lineHeight: 1.2, margin: "0 auto 1.2rem auto", textTransform: "uppercase", letterSpacing: "1px", textShadow: "0 4px 25px rgba(0,0,0,0.9)" }}>
-            أهلاً بك في سيرفر الرول بلاي <br />
-            <span style={{ color: "var(--primary)", textShadow: "0 0 35px rgba(255,0,60,0.8)" }}>صمم قصتك وابدأ واقعك!</span>
+            <span style={{ color: "var(--primary)", textShadow: "0 0 35px rgba(255,0,60,0.8)" }}>Black Horizon RP</span>
           </h1>
 
           <p className="animate-up delay-2" style={{ fontSize: "1.2rem", color: "#e4e4e7", maxWidth: "720px", margin: "0 auto 2.5rem auto", lineHeight: 1.7, textShadow: "0 2px 10px rgba(0,0,0,0.9)" }}>

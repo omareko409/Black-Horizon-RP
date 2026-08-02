@@ -2,47 +2,50 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const ADMIN_ROLES = [
-  "1532005442602008677",
-  "1532006548430393486",
-  "1531460117956923462",
-  "1532009816623415368"
-];
+const SUPER_ADMINS = ["1531460117956923462", "1532009816623415368"];
+const POLICE_ADMINS = ["1526502942494949376", "1526503214881443861"];
+const HEALTH_ADMINS = ["1532420174404255936", "1532370272387334246"];
 
-const ACCEPT_ROLE_ID = "1531941362340069496";
+const ALL_ALLOWED_ADMIN_ROLES = [...SUPER_ADMINS, ...POLICE_ADMINS, ...HEALTH_ADMINS];
 
 export async function POST(req) {
   try {
     const session = await getServerSession(authOptions);
-    
-    if (!session || !session.user.roles.some(role => ADMIN_ROLES.includes(role))) {
+    const mainRoles = session?.user?.mainRoles || [];
+    const deptRoles = session?.user?.deptRoles || [];
+    const userRoles = [...mainRoles, ...deptRoles];
+
+    const isAuthorized = ALL_ALLOWED_ADMIN_ROLES.some(r => userRoles.includes(r));
+
+    if (!session || !isAuthorized) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { targetUserId } = await req.json();
+    const { targetUserId, roleId, guildId, message, isReject } = await req.json();
 
     if (!targetUserId) {
       return NextResponse.json({ error: "Missing targetUserId" }, { status: 400 });
     }
 
     const botToken = process.env.DISCORD_BOT_TOKEN;
-    const guildId = process.env.DISCORD_GUILD_ID;
+    const targetGuildId = guildId || process.env.DISCORD_GUILD_ID || "1531459871902404738";
 
-    // 1. Assign Role
-    const roleRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/members/${targetUserId}/roles/${ACCEPT_ROLE_ID}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bot ${botToken}`,
-        "Content-Type": "application/json"
+    // 1. Assign Role if not rejection
+    if (roleId && !isReject) {
+      const roleRes = await fetch(`https://discord.com/api/v10/guilds/${targetGuildId}/members/${targetUserId}/roles/${roleId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bot ${botToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!roleRes.ok && roleRes.status !== 204) {
+        console.error("Failed to assign role:", await roleRes.text());
       }
-    });
-
-    if (!roleRes.ok && roleRes.status !== 204) {
-      console.error("Failed to assign role:", await roleRes.text());
-      return NextResponse.json({ error: "Failed to assign role" }, { status: 500 });
     }
 
-    // 2. Open DM Channel
+    // 2. Open DM Channel & Send Message
     const dmRes = await fetch(`https://discord.com/api/v10/users/@me/channels`, {
       method: "POST",
       headers: {
@@ -54,7 +57,6 @@ export async function POST(req) {
 
     if (dmRes.ok) {
       const dmChannel = await dmRes.json();
-      // 3. Send Message
       await fetch(`https://discord.com/api/v10/channels/${dmChannel.id}/messages`, {
         method: "POST",
         headers: {
@@ -62,7 +64,7 @@ export async function POST(req) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          content: `🎉 مبروك! لقد تم **قبولك مبدئياً** في المدينة. يرجى التوجه للديسكورد لإكمال باقي الإجراءات.`
+          content: message || "🎉 تم تحديث حالة طلب التقديم الخاص بك في Black Horizon RP!"
         })
       });
     }

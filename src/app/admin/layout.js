@@ -46,7 +46,8 @@ export default function AdminLayout({ children }) {
         <h3 style={{ marginBottom: "1.5rem", color: "var(--primary)" }}>⚙️ لوحة الإدارة</h3>
         <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
           <li><Link href="/admin" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>📊 نظرة عامة</Link></li>
-          <li><Link href="/admin/applications" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>📝 طلبات التقديم</Link></li>
+          <li><Link href="/admin/forms" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>📝 مصمم النماذج (Form Builder)</Link></li>
+          <li><Link href="/admin/applications" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>📋 طلبات التقديم</Link></li>
           <li><Link href="/admin/rules" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>📜 إدارة القوانين</Link></li>
           <li><Link href="/admin/streamers" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>🎥 إدارة الاستريمرز</Link></li>
           <li><Link href="/admin/moments" className="btn-cyber-outline" style={{ display: "block", textAlign: "center", fontSize: "0.95rem" }}>🎬 أجمل اللحظات</Link></li>
