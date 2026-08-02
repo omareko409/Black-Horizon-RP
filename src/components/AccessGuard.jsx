@@ -4,6 +4,7 @@ import { useSession, signIn } from "next-auth/react";
 import { ShieldAlert, LogIn, ExternalLink } from "lucide-react";
 
 const CITIZEN_ROLE_ID = "1531491517956923404";
+const WHITELIST_ROLE_ID = "1531461920136364112";
 
 export default function AccessGuard({ children }) {
   const { data: session, status } = useSession();
@@ -53,21 +54,24 @@ export default function AccessGuard({ children }) {
   }
 
   const mainRoles = session.user.mainRoles || [];
-  const hasCitizenRole = mainRoles.includes(CITIZEN_ROLE_ID);
+  const hasAllowedRole = mainRoles.includes(CITIZEN_ROLE_ID) || mainRoles.includes(WHITELIST_ROLE_ID);
 
-  // Case 2: Not in server or missing Citizen Role
-  if (!hasCitizenRole) {
+  // Case 2: Not in server or missing allowed roles
+  if (!hasAllowedRole) {
     return (
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#070709", padding: "2rem", textAlign: "center", position: "relative" }}>
         <div className="cyber-bg" />
-        <div className="cyber-card" style={{ maxWidth: "600px", padding: "3rem 2rem" }}>
-          <ShieldAlert size={60} color="var(--primary)" style={{ marginBottom: "1.5rem" }} />
-          <h2 style={{ fontSize: "2rem", fontWeight: 900, marginBottom: "1rem", color: "var(--primary)" }}>عفواً! لا تملك الصلاحية ⛔</h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginBottom: "1.5rem", lineHeight: 1.6 }}>
-            أهلاً بك <strong>{session.user.name}</strong>. يرجى التأكد من انضمامك لسيرفر ديسكورد المدينة والحصول على رتبة المواطن <code style={{ color: "var(--primary)" }}>({CITIZEN_ROLE_ID})</code> لتتمكن من تصفح الموقع.
+        <div className="cyber-card" style={{ maxWidth: "600px", padding: "3.5rem 2rem" }}>
+          <ShieldAlert size={64} color="var(--primary)" style={{ marginBottom: "1.5rem" }} />
+          <h2 style={{ fontSize: "1.8rem", fontWeight: 900, marginBottom: "1rem", color: "var(--primary)" }}>تنبيه الهوية والصلاحية ⛔</h2>
+          <p style={{ color: "#ffffff", fontSize: "1.2rem", marginBottom: "1.8rem", lineHeight: 1.8, fontWeight: 700 }}>
+            أنت لم تكن في السيرفر أو يوجد مشكلة فنية، برجاء تواصل مع الإدارة.
+          </p>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginBottom: "2rem" }}>
+            مرحباً {session.user.name}، يرجى التأكد من تواجدك في سيرفر المدينة وحصولك على الرتبة المعتمدة.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="https://discord.gg/" target="_blank" rel="noreferrer" className="btn-cyber-primary">
+            <a href="https://discord.gg/" target="_blank" rel="noreferrer" className="btn-cyber-primary" style={{ borderRadius: "50px" }}>
               انضم لسيرفر الديسكورد <ExternalLink size={18} />
             </a>
           </div>
@@ -76,6 +80,6 @@ export default function AccessGuard({ children }) {
     );
   }
 
-  // Case 3: Fully Authorized Citizen
+  // Case 3: Fully Authorized
   return <>{children}</>;
 }
