@@ -71,7 +71,7 @@ export default function AccessGuard({ children }) {
             مرحباً {session.user.name}، يرجى التأكد من تواجدك في سيرفر المدينة وحصولك على الرتبة المعتمدة.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="https://discord.gg/" target="_blank" rel="noreferrer" className="btn-cyber-primary" style={{ borderRadius: "50px" }}>
+            <a href="https://discord.gg/PmhbYNPSn" target="_blank" rel="noreferrer" className="btn-cyber-primary" style={{ borderRadius: "50px" }}>
               انضم لسيرفر الديسكورد <ExternalLink size={18} />
             </a>
           </div>

@@ -40,7 +40,16 @@ export default function Header() {
         </nav>
 
         {/* Auth Button (Left in RTL) */}
-        <div className="floating-auth">
+        <div className="floating-auth" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <a 
+            href="https://discord.gg/PmhbYNPSn" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="btn-cyber-outline" 
+            style={{ borderRadius: "50px", fontSize: "0.85rem", padding: "8px 16px" }}
+          >
+            💬 انضم للديسكورد
+          </a>
           {session ? (
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <button className="btn-pill-discord" onClick={() => signOut()}>تسجيل الخروج</button>

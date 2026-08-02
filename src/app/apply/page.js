@@ -98,14 +98,21 @@ export default function ApplyPage() {
       </div>
 
       {/* Category Tabs */}
-      <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginBottom: "2.5rem", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "1.2rem", justifyContent: "center", marginBottom: "3rem", flexWrap: "wrap" }}>
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
             className={selectedCategory === cat.id ? "btn-cyber-primary" : "btn-cyber-outline"}
-            style={{ borderRadius: "50px", fontSize: "1.05rem", padding: "12px 28px" }}
+            style={{ 
+              borderRadius: "50px", 
+              fontSize: "1.1rem", 
+              padding: "14px 32px",
+              boxShadow: selectedCategory === cat.id ? "0 0 25px rgba(255, 0, 60, 0.6)" : "none",
+              transition: "all 0.3s ease"
+            }}
           >
+            {cat.id === "whitelist" ? "📜 " : cat.id === "police" ? "🚓 " : "🏥 "}
             {cat.name}
           </button>
         ))}
