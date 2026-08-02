@@ -7,8 +7,8 @@ const DEPT_GUILD_ID = "1526502762878210098";
 export const authOptions = {
   providers: [
     DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID || "",
-      clientSecret: process.env.DISCORD_CLIENT_SECRET || "",
+      clientId: (process.env.DISCORD_CLIENT_ID || "1531600718178422914").trim(),
+      clientSecret: (process.env.DISCORD_CLIENT_SECRET || "7Oubo0abvNC8c0xRjtEpw421uO51J_JS").trim(),
       authorization: { params: { scope: "identify guilds.members.read" } },
     }),
   ],
