@@ -132,24 +132,28 @@ a {
 /* Floating Pill Navbar */
 .floating-header {
   position: fixed;
-  top: 30px;
+  top: 25px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
-  max-width: 900px;
-  background: #1a1a1a;
+  width: max-content;
+  max-width: 95vw;
+  background: rgba(15, 15, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: 50px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  z-index: 100;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  border: 1px solid rgba(255, 0, 60, 0.2);
 }
 
 .floating-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 15px 8px 25px; /* Adjust padding for button */
-  height: 60px;
+  padding: 8px 20px;
+  gap: 1.5rem;
+  height: 64px;
+  white-space: nowrap;
 }
 
 .floating-logo {
@@ -158,10 +162,11 @@ a {
   justify-content: center;
   background: #ffffff;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .floating-logo img {
@@ -173,19 +178,21 @@ a {
 
 .floating-nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.2rem;
   align-items: center;
+  white-space: nowrap;
 }
 
 .floating-nav-links a {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #e0e0e0;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 20px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Cairo', sans-serif;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .floating-nav-links a:hover {

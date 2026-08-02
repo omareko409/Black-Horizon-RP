@@ -12,6 +12,7 @@ const CATEGORIES = [
   { id: "whitelist", name: "تقديم المدينة" },
   { id: "police", name: "وزارة الداخلية (الشرطة)" },
   { id: "health", name: "وزارة الصحة (المراد)" },
+  { id: "staff", name: "تقديم إدارة (Staff)" },
 ];
 
 export default function ApplyPage() {
@@ -215,8 +216,23 @@ export default function ApplyPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="btn-cyber-primary"
-            style={{ width: "100%", padding: "16px", fontSize: "1.2rem", justifyContent: "center", borderRadius: "50px" }}
+            style={{ 
+              width: "100%", 
+              padding: "18px", 
+              fontSize: "1.25rem", 
+              fontWeight: 800,
+              justifyContent: "center", 
+              borderRadius: "50px",
+              background: "linear-gradient(135deg, #ff003c 0%, #80001f 100%)",
+              color: "#ffffff",
+              border: "2px solid #ff003c",
+              boxShadow: "0 0 30px rgba(255, 0, 60, 0.6)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              transition: "all 0.3s ease"
+            }}
           >
             {submitting ? "جاري الإرسال..." : "إرسال طلب التقديم 🔥"} <Send size={20} />
           </button>

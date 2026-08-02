@@ -10,6 +10,7 @@ const CATEGORIES = [
   { id: "whitelist", name: "تقديم المدينة" },
   { id: "police", name: "وزارة الداخلية (الشرطة)" },
   { id: "health", name: "وزارة الصحة (المراد)" },
+  { id: "staff", name: "تقديم إدارة (Staff)" },
 ];
 
 const SUPER_ADMINS = ["1531460117956923462", "1532009816623415368"];

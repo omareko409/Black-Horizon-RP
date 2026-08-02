@@ -83,6 +83,10 @@ export default function ApplicationsAdmin() {
       roleId = "1531461920136364112";
       guildId = MAIN_GUILD_ID;
       message = "🎉 مبروك! تم قبول طلبك ورتبة الوايت ليست بنجاح في مدينة Black Horizon RP!";
+    } else if (actionType === "staff_accept") {
+      roleId = "1531460117956923462";
+      guildId = MAIN_GUILD_ID;
+      message = "👑 مبروك! لقد تم قبول طلب التقديم الخاص بك والانضمام لكادر إدارة Black Horizon RP!";
     } else if (actionType === "reject") {
       isReject = true;
       statusText = "rejected";
@@ -147,7 +151,7 @@ export default function ApplicationsAdmin() {
 
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <span style={{ background: "rgba(255,0,60,0.15)", border: "1px solid var(--primary)", color: "#fff", padding: "4px 14px", borderRadius: "50px", fontSize: "0.9rem", fontWeight: "bold" }}>
-                    {app.category === "police" ? "🚓 وزارة الداخلية" : app.category === "health" ? "🏥 وزارة الصحة" : "📜 الوايت ليست"}
+                    {app.category === "police" ? "🚓 وزارة الداخلية" : app.category === "health" ? "🏥 وزارة الصحة" : app.category === "staff" ? "👑 تقديم إدارة" : "📜 تقديم المدينة"}
                   </span>
 
                   <span style={{
@@ -225,7 +229,18 @@ export default function ApplicationsAdmin() {
                     className="btn-cyber-primary"
                     style={{ borderRadius: "50px", fontSize: "0.95rem", padding: "10px 20px", background: "linear-gradient(45deg, #10b981, #059669)" }}
                   >
-                    ✅ قبول الوايت ليست
+                    ✅ قبول تقديم المدينة
+                  </button>
+                )}
+
+                {app.category === "staff" && (
+                  <button
+                    disabled={processingId === app.id}
+                    onClick={() => handleAction(app, "staff_accept")}
+                    className="btn-cyber-primary"
+                    style={{ borderRadius: "50px", fontSize: "0.95rem", padding: "10px 20px", background: "linear-gradient(45deg, #10b981, #059669)" }}
+                  >
+                    👑 قبول طلب الإدارة
                   </button>
                 )}
 
