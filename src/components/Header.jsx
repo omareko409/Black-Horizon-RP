@@ -7,6 +7,18 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export default function Header() {
   const { data: session } = useSession();
 
+  const mainRoles = session?.user?.mainRoles || [];
+  const deptRoles = session?.user?.deptRoles || [];
+  const allRoles = [...mainRoles, ...deptRoles];
+
+  const ADMIN_ROLES = [
+    "1531460117956923462", "1532009816623415368",
+    "1526502942494949376", "1526503214881443861",
+    "1532420174404255936", "1532370272387334246"
+  ];
+
+  const isAdmin = ADMIN_ROLES.some(r => allRoles.includes(r));
+
   return (
     <header className="floating-header">
       <div className="floating-header-container">
@@ -22,6 +34,9 @@ export default function Header() {
           <Link href="/apply">التقديم</Link>
           <Link href="/rules">القوانين</Link>
           <Link href="/status">حالة السيرفر</Link>
+          {isAdmin && (
+            <Link href="/admin" style={{ color: "var(--primary)", fontWeight: "bold" }}>⚡ لوحة الإدارة</Link>
+          )}
         </nav>
 
         {/* Auth Button (Left in RTL) */}
