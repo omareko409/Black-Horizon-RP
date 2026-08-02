@@ -45,8 +45,7 @@ export default function Header() {
             href="https://discord.gg/PmhbYNPSn" 
             target="_blank" 
             rel="noreferrer" 
-            className="btn-cyber-outline" 
-            style={{ borderRadius: "50px", fontSize: "0.85rem", padding: "8px 16px" }}
+            className="btn-discord-join-nav"
           >
             💬 انضم للديسكورد
           </a>

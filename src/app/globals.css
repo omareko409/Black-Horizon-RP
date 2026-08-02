@@ -215,6 +215,30 @@ a {
   box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
 }
 
+.btn-discord-join-nav {
+  background: rgba(88, 101, 242, 0.15);
+  border: 1px solid #5865F2;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.2);
+}
+
+.btn-discord-join-nav:hover {
+  background: #5865F2;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 25px rgba(88, 101, 242, 0.7);
+}
+
 /* Custom Range Slider for Audio */
 .volume-slider {
   -webkit-appearance: none;

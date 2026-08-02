@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { Plus, Trash2, Save, Power, Check } from "lucide-react";
 
 const CATEGORIES = [
-  { id: "whitelist", name: "التقديم العام (الوايت ليست)" },
+  { id: "whitelist", name: "تقديم المدينة" },
   { id: "police", name: "وزارة الداخلية (الشرطة)" },
   { id: "health", name: "وزارة الصحة (المراد)" },
 ];

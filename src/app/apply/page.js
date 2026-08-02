@@ -9,7 +9,7 @@ import { ShieldCheck, Lock, Send, CheckCircle2 } from "lucide-react";
 const WHITELIST_ROLE_ID = "1531461920136364112";
 
 const CATEGORIES = [
-  { id: "whitelist", name: "التقديم العام (الوايت ليست)" },
+  { id: "whitelist", name: "تقديم المدينة" },
   { id: "police", name: "وزارة الداخلية (الشرطة)" },
   { id: "health", name: "وزارة الصحة (المراد)" },
 ];
@@ -99,23 +99,35 @@ export default function ApplyPage() {
 
       {/* Category Tabs */}
       <div style={{ display: "flex", gap: "1.2rem", justifyContent: "center", marginBottom: "3rem", flexWrap: "wrap" }}>
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategory(cat.id)}
-            className={selectedCategory === cat.id ? "btn-cyber-primary" : "btn-cyber-outline"}
-            style={{ 
-              borderRadius: "50px", 
-              fontSize: "1.1rem", 
-              padding: "14px 32px",
-              boxShadow: selectedCategory === cat.id ? "0 0 25px rgba(255, 0, 60, 0.6)" : "none",
-              transition: "all 0.3s ease"
-            }}
-          >
-            {cat.id === "whitelist" ? "📜 " : cat.id === "police" ? "🚓 " : "🏥 "}
-            {cat.name}
-          </button>
-        ))}
+        {CATEGORIES.map((cat) => {
+          const isSelected = selectedCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              style={{ 
+                borderRadius: "14px", 
+                fontSize: "1.15rem", 
+                fontWeight: 800,
+                padding: "14px 32px",
+                background: isSelected 
+                  ? "linear-gradient(135deg, #ff003c 0%, #990024 100%)" 
+                  : "linear-gradient(135deg, #180309 0%, #070709 100%)",
+                color: "#ffffff",
+                border: isSelected ? "2px solid #ff003c" : "1px solid rgba(255, 0, 60, 0.3)",
+                boxShadow: isSelected ? "0 0 30px rgba(255, 0, 60, 0.7)" : "0 4px 15px rgba(0,0,0,0.5)",
+                cursor: "pointer",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px"
+              }}
+            >
+              {cat.id === "whitelist" ? "📜 " : cat.id === "police" ? "🚓 " : "🏥 "}
+              {cat.name}
+            </button>
+          );
+        })}
       </div>
 
       {loading ? (

@@ -23,8 +23,10 @@ export default function Home() {
           paddingTop: "120px", 
           paddingBottom: "60px",
           position: "relative",
-          background: `linear-gradient(to bottom, rgba(7, 7, 9, 0.65) 0%, rgba(7, 7, 9, 0.8) 70%, rgba(7, 7, 9, 1) 100%), url('https://i.postimg.cc/rFnZRjp6/images.jpg') center/cover no-repeat`,
-          boxShadow: "inset 0 0 120px rgba(0,0,0,0.9)"
+          background: `linear-gradient(to bottom, rgba(7, 7, 9, 0.4) 0%, rgba(7, 7, 9, 0.7) 60%, rgba(7, 7, 9, 1) 100%), url('https://i.postimg.cc/rFnZRjp6/images.jpg') center/cover no-repeat`,
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+          boxShadow: "inset 0 -100px 100px rgba(7,7,9,1)"
         }}
       >
         <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: "950px" }}>
