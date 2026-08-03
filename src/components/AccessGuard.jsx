@@ -3,8 +3,13 @@
 import { useSession, signIn } from "next-auth/react";
 import { ShieldAlert, LogIn, ExternalLink } from "lucide-react";
 
-const CITIZEN_ROLE_ID = "1531491517956923404";
-const WHITELIST_ROLE_ID = "1531461920136364112";
+const ALLOWED_ENTRY_ROLES = [
+  "1531491517956923404", // Citizen Role
+  "1531461920136364112", // Whitelist Role
+  "1531460117956923462", "1532009816623415368", // Super Admins
+  "1526502942494949376", "1526503214881443861", // Police Admins
+  "1532420174404255936", "1532370272387334246"  // Health Admins
+];
 
 export default function AccessGuard({ children }) {
   const { data: session, status } = useSession();
@@ -54,7 +59,11 @@ export default function AccessGuard({ children }) {
   }
 
   const mainRoles = session.user.mainRoles || [];
-  const hasAllowedRole = mainRoles.includes(CITIZEN_ROLE_ID) || mainRoles.includes(WHITELIST_ROLE_ID);
+  const deptRoles = session.user.deptRoles || [];
+  const fallbackRoles = session.user.roles || [];
+  const allUserRoles = [...mainRoles, ...deptRoles, ...fallbackRoles];
+
+  const hasAllowedRole = ALLOWED_ENTRY_ROLES.some(r => allUserRoles.includes(r)) || session.user.isServerMember;
 
   // Case 2: Not in server or missing allowed roles
   if (!hasAllowedRole) {
